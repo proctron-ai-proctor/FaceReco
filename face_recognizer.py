@@ -6,6 +6,12 @@ import os
 from google.colab.patches import cv2_imshow
 
 IMAGE_RES = (256, 256)
+font = cv2.FONT_HERSHEY_COMPLEX # Text in video
+font_size = 0.4
+blue = (225,0,0)
+green = (0,128,0)
+red = (0,0,255)
+orange = (0,140,255)
 
 class FaceRecognizer:
   def __init__(self, faceCascadePath, encodingsPath) -> None:
