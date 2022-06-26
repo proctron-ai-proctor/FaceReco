@@ -14,12 +14,13 @@ red = (0,0,255)
 orange = (0,140,255)
 
 class FaceRecognizer:
-  def __init__(self, faceCascadePath, encodingsPath) -> None:
+  def __init__(self, faceCascadePath, encodingsPath, tolerance=0.6) -> None:
     self._faceCascade = cv2.CascadeClassifier(faceCascadePath)
     self._encodingsPath = encodingsPath
     self._knownEncodings = []
     self._knownNames = []
     self._data = {}
+    self._tolerance = tolerance
  
   def learn_faces_batch(self, imagePaths):
     for imagePath in imagePaths:
@@ -83,7 +84,7 @@ class FaceRecognizer:
       # Matches contain array with boolean values and True for the encodings it matches closely
       # and False for rest
       matches = face_recognition.compare_faces(self._data["encodings"],
-        encoding)
+        encoding, tolerance=self._tolerance)
       # set name = unknown if no encoding matches
       name = "Unknown"
       # check to see if we have found a match
